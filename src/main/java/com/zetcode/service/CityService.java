@@ -1,0 +1,37 @@
+package com.zetcode.service;
+
+import com.zetcode.model.City;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CityService implements ICityService {
+
+    @Autowired
+    private JdbcTemplate jtm;
+
+    @Override
+    public List<City> findAll() {
+
+        String sql = "SELECT * FROM cities";
+
+        return jtm.query(sql, new BeanPropertyRowMapper<>(City.class));
+    }
+
+//        List<City> cities = new ArrayList<>();
+//
+//        cities.add(new City(1L, "Bratislava", 432000));
+//        cities.add(new City(2L, "Budapest", 1759000));
+//        cities.add(new City(3L, "Prague", 1280000));
+//        cities.add(new City(4L, "Warsaw", 1748000));
+//        cities.add(new City(5L, "Los Angeles", 3971000));
+//        cities.add(new City(6L, "New York", 8550000));
+//        cities.add(new City(7L, "Edinburgh", 464000));
+//        cities.add(new City(8L, "Berlin", 3671000));
+//
+//        return cities;
+}
